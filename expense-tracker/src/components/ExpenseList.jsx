@@ -1,6 +1,12 @@
 import React from "react";
 import ExpenseItem from "./ExpenseItem.jsx";
+
 const ExpenseList = ({ expenses }) => {
+  const totalAmount = expenses.reduce(
+    (sum, expense) => sum + parseFloat(expense.amount),
+    0,
+  );
+
   if (expenses.length === 0) {
     return (
       <div>
@@ -12,7 +18,7 @@ const ExpenseList = ({ expenses }) => {
   return (
     <div>
       <h2>Expenses</h2>
-      <h4>Total items: {expenses.length}</h4>
+      <h3>Total spent: {totalAmount}</h3>
 
       {expenses.map((expense) => {
         <ExpenseItem key={expense.id} expense={expense} />;

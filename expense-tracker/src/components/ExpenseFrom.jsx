@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ExpenseFrom = () => {
+const ExpenseFrom = ({ onAddExpense }) => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -41,11 +41,19 @@ const ExpenseFrom = () => {
     if (!validate()) return;
 
     const expenseData = {
-      amount,
+      id: Date.now().toString(),
+      amount: Number(amount),
       description,
       category,
       date,
     };
+
+    onAddExpense(expenseData);
+
+    setAmount("");
+    setDescription("");
+    setCategory("");
+    setDate("");
 
     console.log("Valid Expense:", expenseData);
   };

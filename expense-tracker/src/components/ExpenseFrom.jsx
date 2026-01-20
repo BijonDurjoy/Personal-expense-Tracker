@@ -1,23 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ExpenseFrom = () => {
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [date, setDate] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const expenseData = {
+      amount,
+      description,
+      category,
+      date,
+    };
+
+    console.log(expenseData);
+  };
+
   return (
     <div>
       <h2>Add new Expense</h2>
-      <form action="">
-        <input type="number" placeholder="Amount" required />
-        <input type="text" placeholder="Description" required />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
 
-        <select>
+        <input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">Select Category</option>
-          <option value="food">Food</option>
-          <option value="transportation">Transportation</option>
-          <option value="entertainment">Entertainment</option>
-          <option value="shopping">Shopping</option>
-          <option value="bills">Bills</option>
-          <option value="others">Others</option>
+          <option value="Food">Food</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Bills">Bills</option>
+          <option value="Others">Others</option>
         </select>
-        <input type="date" />
+
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
         <button type="submit">Add Expense</button>
       </form>
     </div>

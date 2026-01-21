@@ -9,6 +9,13 @@ function App() {
   const addExpense = (expense) => {
     setExpenses((prevExpenses) => [expense, ...prevExpenses]);
   };
+
+  const deleteExpense = (id) => {
+    setExpenses((prevExpenses) =>
+      prevExpenses.filter((expense) => expense.id !== id),
+    );
+  };
+
   return (
     <div className="app-container">
       <h1>Expense Tracker App</h1>
@@ -17,7 +24,7 @@ function App() {
 
       <Filter />
 
-      <ExpenseList expenses={expenses} />
+      <ExpenseList expenses={expenses} onDeleteExpense={deleteExpense} />
     </div>
   );
 }

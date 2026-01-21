@@ -1,7 +1,7 @@
 import React from "react";
 import ExpenseItem from "./ExpenseItem.jsx";
 
-const ExpenseList = ({ expenses }) => {
+const ExpenseList = ({ expenses, onDeleteExpense }) => {
   const totalAmount = expenses.reduce(
     (sum, expense) => sum + parseFloat(expense.amount),
     0,
@@ -20,9 +20,13 @@ const ExpenseList = ({ expenses }) => {
       <h2>Expenses</h2>
       <h3>Total spent: {totalAmount}</h3>
 
-      {expenses.map((expense) => {
-        <ExpenseItem key={expense.id} expense={expense} />;
-      })}
+      {expenses.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          expense={expense}
+          onDelete={onDeleteExpense}
+        />
+      ))}
 
       {/* Later we will map expenses here */}
       {/* <ExpenseItem /> */}

@@ -1,21 +1,34 @@
 import React from "react";
 
-const Filter = () => {
+const Filter = ({
+  selectedCategory,
+  onCategoryChange,
+  searchText,
+  onSearchChange,
+}) => {
   return (
     <div>
       <h3>Filter Expenses</h3>
 
-      <select>
+      <select
+        value={selectedCategory}
+        onChange={(e) => onCategoryChange(e.target.value)}
+      >
         <option value="">All Categories</option>
-        <option value="food">Food</option>
-        <option value="transportation">Transportation</option>
-        <option value="entertainment">Entertainment</option>
-        <option value="shopping">Shopping</option>
-        <option value="bills">Bills</option>
-        <option value="others">Others</option>
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Bills">Bills</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Others">Others</option>
       </select>
 
-      <input type="text" placeholder="Search by description" />
+      <input
+        type="text"
+        placeholder="Search by description"
+        value={searchText}
+        onChange={(e) => onSearchChange(e.target.value)}
+      />
     </div>
   );
 };

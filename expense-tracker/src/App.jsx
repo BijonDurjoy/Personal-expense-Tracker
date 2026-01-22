@@ -12,13 +12,23 @@ function App() {
   useEffect(() => {
     const storedExpenses = localStorage.getItem("expenses");
     if (storedExpenses) {
-      setExpenses(JSON.parse(storedExpenses));
+      try {
+        setExpenses(JSON.parse(storedExpenses));
+      } catch (error) {
+        console.error("Failed to parse expenses from localStorage: ", error);
+        setExpenses([]);
+        localStorage.removeItem("expenses");
+      }
     }
   }, []);
 
   // Save expenses to localStorage
   useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
+    try {
+      localStorage.setItem("expenses", JSON.stringify(expenses));
+    } catch (error) {
+      console.error("Failed to save expenses to localStorage: ", error);
+    }
   }, [expenses]);
 
   const addExpense = (expense) => {

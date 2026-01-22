@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ExpenseFrom = ({ onAddExpense }) => {
+const ExpenseForm = ({ onAddExpense }) => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -116,4 +116,4 @@ const ExpenseFrom = ({ onAddExpense }) => {
   );
 };
 
-export default ExpenseFrom;
+export default ExpenseForm;

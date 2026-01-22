@@ -1,5 +1,5 @@
-import { useState } from "react";
-import ExpenseForm from "./components/ExpenseFrom.jsx";
+import { useEffect, useState } from "react";
+import ExpenseForm from "./components/ExpenseForm.jsx";
 import ExpenseList from "./components/ExpenseList.jsx";
 import Filter from "./components/Filter.jsx";
 
@@ -8,14 +8,25 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchText, setSearchText] = useState("");
 
+  // Load expenses safely from localStorage
+  useEffect(() => {
+    const storedExpenses = localStorage.getItem("expenses");
+    if (storedExpenses) {
+      setExpenses(JSON.parse(storedExpenses));
+    }
+  }, []);
+
+  // Save expenses to localStorage
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
+
   const addExpense = (expense) => {
-    setExpenses((prevExpenses) => [expense, ...prevExpenses]);
+    setExpenses((prev) => [expense, ...prev]);
   };
 
   const deleteExpense = (id) => {
-    setExpenses((prevExpenses) =>
-      prevExpenses.filter((expense) => expense.id !== id),
-    );
+    setExpenses((prev) => prev.filter((expense) => expense.id !== id));
   };
 
   const filteredExpenses = expenses.filter((expense) => {
@@ -30,8 +41,8 @@ function App() {
   });
 
   return (
-    <div className="app-container">
-      <h1>Expense Tracker App</h1>
+    <div>
+      <h1>Personal Expense Tracker</h1>
 
       <ExpenseForm onAddExpense={addExpense} />
 
